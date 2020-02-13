@@ -1,0 +1,55 @@
+@btn-blue: rgba(45, 130, 255, 1); //按钮蓝色
+@btn-orange: rgba(247, 158, 62, 1); //按钮橘色
+@font-color-gray: rgba(102, 102, 102, 1); //字体颜色灰色
+@font-color-white: rgba(255, 255, 255, 1); //字体颜色白色
+
+//物流信息前的圆点
+.before(@color: @btn-blue, @img: url("../../assets/offer/start.png")) {
+    content: @img;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    display: block;
+    line-height: 1px;
+    // width: 8px;
+    // height: 8px;
+    // border-radius: 8px;
+    // background-color: @color;
+}
+
+.dot(@color: @btn-blue) {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    transform: translate(0, -50%);
+    background: @color;
+    border: 1px solid @color;
+    border-radius: 50%;
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+}
+
+//字体大小颜色
+.font(@size: 14px, @weight: 400, @color: @font-color-gray) {
+    font-size: @size;
+    font-family: Source Han Sans SC;
+    font-weight: @weight;
+    color: @color;
+}
+
+//订单页面按钮样式
+.sendBtn {
+    background-color: @btn-blue;
+    .font(15px, 400, @font-color-white);
+    position: fixed;
+    bottom: 0;
+}

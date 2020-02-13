@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="maximum-scale=1,minimum-scale=1,user-scalable=0,width=device-width,initial-scale=1,viewport-fit=cover">
+  <van-number-keyboard safe-area-inset-bottom />
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=d2onSYbt4kbVqnG9qZ1lvOYcU1dOzdTg"></script>
+  <style>
+    html,
+    body {
+      min-height: 100%;
+      background: #f0f0f0;
+    }
+  </style>
+  <title>物流系统</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but logistics doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+
+  <script>
+    window.alert = function (name) {
+      var iframe = document.createElement("IFRAME");
+      iframe.style.display = "none";
+      iframe.setAttribute("src", 'data:text/plain,');
+      document.documentElement.appendChild(iframe);
+      window.frames[0].window.alert(name);
+      iframe.parentNode.removeChild(iframe);
+    };
+  </script>
+</body>
+
+</html>
