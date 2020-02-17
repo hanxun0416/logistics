@@ -403,7 +403,7 @@ export default new Router({
     name: "hello",
     component: Hello,
     meta: {
-      title: "测试",
+      title: "这是测试",
 
     }
   },
