@@ -17,7 +17,10 @@
     <van-divider style="margin:0" />
     <div class="data">
       <span>运单号：{{carddata.allBillNo}}</span>
-      <span class="price">{{`￥${price}`}}</span>
+         <span class="price">{{`￥${price}`}}</span>
+    </div>
+    <div class="orderUnPay">
+       
     </div>
   </div>
 </template>
@@ -168,6 +171,23 @@ export default {
     .price {
       .font(14px, bold, @btn-blue);
     }
+
   }
 }
+.orderUnPay,
+.orderPay{
+  width: 81.5px;
+  height: 63.5px;
+  position: absolute;
+  right: 10.5px;
+  top: 52px;
+  font-size: 14px;
+  background: url('../../assets/settlement/yifukuan.png') no-repeat;
+  background-size: 81.5px 63.5px
+}
+.orderUnPay{
+  background: url('../../assets/settlement/weifukuan.png') no-repeat;
+   background-size: 81.5px 63.5px
+}
+
 </style>

@@ -3,12 +3,16 @@
     <div class="main-head">
       <img @click="toMine()" src="../../assets/offer/wode.png" />
       <div class="paid">
+        <router-link to="invoiced" >
         <span class="amount">{{moneySum5}}</span>
-        <span class="tag">待付款(元)</span>
+        <span class="tag">待付款(元) </span>
+       </router-link>
       </div>
       <div class="unpaid">
+         <router-link to="invoiced" >
         <span class="amount">{{moneySum6}}</span>
         <span class="tag">已付款(元)</span>
+          </router-link>
       </div>
     </div>
     <div class="main-mid">

@@ -104,6 +104,7 @@ export default {
       this.$api
         .post(link.login, postObj)
         .then(result => {
+          console.log(result)
             switch(result.data.msg){
               case '1':Toast.success("登陆成功");this.$store.commit("login/updateToken", {token:result.data.data,isCarrier:true});this.$router.push({name:'home'});break;
               case '2':this.isUser=true;Toast.clear();break;

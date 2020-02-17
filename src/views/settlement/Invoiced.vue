@@ -57,6 +57,7 @@ export default {
       this.$api
         .post(link.invoiced, postObj)
         .then(result => {
+          console.log(result)
           if (result.data.code == "200") {
             this.pageCount = result.data.data.pageNo;
             this.pageNo++;
