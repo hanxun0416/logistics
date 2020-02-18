@@ -2,6 +2,7 @@
 node_modules
 /dist
 /ROOT
+/logistics_FeServer.tar.gz_*
 
 # local env files
 .env.local
