@@ -1,6 +1,5 @@
 const path = require("path");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
-const Timestamp = new Date().getTime();
 module.exports = {
   publicPath: "./",
   outputDir:'ROOT',
