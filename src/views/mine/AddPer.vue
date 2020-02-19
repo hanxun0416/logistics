@@ -13,8 +13,8 @@
       type="password"
       label="确认密码"
       placeholder="请输入确认密码"
-    />
-    <van-button color="#2D82FF" round class="addbtn">确认添加</van-button>
+    /> 
+    <van-button color="#2D82FF" round class="addbtn" @click="addPer">确认添加</van-button>
   </div>
 </template>
 <script>
@@ -27,7 +27,12 @@ export default {
   },
   data() {
     return {};
-  }
+  },
+  methods: {
+      addPer(){
+         this.$router.go(-1)
+      }
+  },
 };
 </script>
 <style lang="less" scoped>

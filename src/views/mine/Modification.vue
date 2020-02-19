@@ -1,7 +1,7 @@
 <template>
   <div class="addper">
-    <van-field v-model="text" label="姓名" readonly />
-    <van-field v-model="tel" label="子账号" readonly />
+    <van-field v-model="pername" label="姓名" readonly />
+    <van-field v-model="permobile" label="子账号" readonly />
     <van-field
       v-model="digit"
       type="password"
@@ -14,30 +14,37 @@
       label="确认密码"
       placeholder="请输入确认新密码"
     />
-        <van-cell title="职员权限可用" border class="perswitch">
-            <template slot="default">
-                <van-switch v-model="checked" />
-            </template>
-            </van-cell>
+    <van-cell title="职员权限可用" border class="perswitch">
+      <template slot="default">
+        <van-switch v-model="checked" size='5vw' inactive-color="#B3B3B3" />
+      </template>
+    </van-cell>
 
-    <van-button color="#2D82FF" round class="addbtn">确认修改</van-button>
+    <van-button color="#2D82FF" round class="addbtn" @click="confirmPer">确认修改</van-button>
   </div>
 </template>
 <script>
-import { Field, Button,Cell,Switch  } from "vant";
+import { Field, Button, Cell, Switch } from "vant";
 export default {
   name: "addper",
   components: {
     [Field.name]: Field,
     [Button.name]: Button,
     [Cell.name]: Cell,
-    [Switch.name]: Switch,
+    [Switch.name]: Switch
   },
   data() {
     return {
-        checked:true
-    };
-  }
+      pername:'张三',
+      permobile:'12345678910',
+      checked: true,
+    }
+  },
+  methods: {
+    confirmPer(){
+     this.$router.go(-1)
+    }
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -61,7 +68,15 @@ export default {
   color: rgba(255, 255, 255, 1);
   line-height: 20px;
 }
-.perswitch{
-    margin-top: 10px;
+.perswitch {
+  margin-top: 10px;
+}
+.modbtn {
+  height: 20px;
+  background: rgba(45, 130, 255, 1);
+  line-height: 20px;
+}
+ .addper .van-field__control{
+  text-align: right;
 }
 </style>

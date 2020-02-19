@@ -2,8 +2,8 @@
     <div class="perlist">
           <van-cell title="张三" border>
             <template slot="default">
-                <span class="edit">编辑</span>
-                <span class="allocation">权限设置</span>
+                <span class="edit" @click="openMod">编辑</span>
+                <span class="allocation" @click="openProSet">权限设置</span>
             </template>
             </van-cell>
     </div>
@@ -11,22 +11,29 @@
 <script>
 import { Cell } from "vant";
 export default {
+    components:{
+        [Cell.name]:Cell
+    },
     data() {
         return {
         }
     },
-    components:{
-        [Cell.name]:Cell
-    }
+    methods: {
+        // 打开编辑弹窗
+        openMod(){
+            this.$router.push({name:'modification'})
+        },
+        openProSet(){
+             this.$router.push({name:'proset'})
+        }
+    },
+
 }
 </script>
 <style lang="less" scoped>
 .perlist{
     border-bottom: 1px solid #ebedf0;
     width: 375px;
-// box-sizing: border-box;
-// padding-left:10px ;
-
 }
 .edit{
 margin-right: 10px;

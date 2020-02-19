@@ -131,6 +131,18 @@ const Map=()=>import('../views/map/Map.vue').catch(() => {
 const MineManage=()=>import('../views/mine/MineManage.vue').catch(() => {
   Toast('loading...')
 })
+//职员权限管理
+const ProSet=()=>import('../views/mine/ProSet.vue').catch(() => {
+  Toast('loading...')
+})
+//新增职员权限
+const AddPer=()=>import('../views/mine/AddPer.vue').catch(() => {
+  Toast('loading...')
+})
+//职员权限信息编辑
+const Modification=()=>import('../views/mine/Modification.vue').catch(() => {
+  Toast('loading...')
+})
 //测试
 const Hello=()=>import('../views/helloWorld/HelloWorld.vue').catch(() => {
   Toast('loading...')
@@ -412,6 +424,40 @@ export default new Router({
 
     }
   },
+  {
+    path: "/proset",
+    name: "proset",
+    component: ProSet,
+    meta: {
+      title: "权限设置",
+      isLogin:true
+
+    }
+  },
+  {
+    path: "/addper",
+    name: "addper",
+    component: AddPer,
+    meta: {
+      title: "新增职员权限",
+      isLogin:true
+
+    }
+  },
+  {
+    path: "/modification",
+    name: "modification",
+    component: Modification,
+    meta: {
+      title: "编辑",
+      isLogin:true
+
+    }
+  },
+
+
+
+
   {
     path: "/hello",
     name: "hello",
