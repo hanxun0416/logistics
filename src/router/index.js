@@ -127,10 +127,15 @@ const Img = () => import('../views/user/Img.vue').catch(() => {
 const Map=()=>import('../views/map/Map.vue').catch(() => {
   Toast('loading...')
 })
+//职员权限
+const MineManage=()=>import('../views/mine/MineManage.vue').catch(() => {
+  Toast('loading...')
+})
 //测试
 const Hello=()=>import('../views/helloWorld/HelloWorld.vue').catch(() => {
   Toast('loading...')
 })
+
 Vue.use(Router);
 
 export default new Router({
@@ -394,8 +399,17 @@ export default new Router({
     name: "map",
     component: Map,
     meta: {
-      
       isLogin:true
+    }
+  },
+  {
+    path: "/mineManage",
+    name: "mineManage",
+    component: MineManage,
+    meta: {
+      title: "职员权限",
+      isLogin:true
+
     }
   },
   {
