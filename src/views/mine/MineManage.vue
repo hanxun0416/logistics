@@ -1,7 +1,7 @@
 <template>
   <div class="manage">
     <div class="manage-title" >
-      <van-cell title="新增职员权限" title-class="addtitle" @click="addPer">
+      <van-cell title="新增职员权限" title-class="addtitle" @click="addPerShow=true">
         <van-icon
           slot="right-icon"
           name="plus"
@@ -10,42 +10,39 @@
           color="#666666"
         />
       </van-cell>
+         <van-popup v-model="addPerShow" class="addPerShow"  safe-area-inset-bottom >
+                <addper></addper>
+             </van-popup>
     </div>
      <div class="manage-main">
-            <van-cell title="张三" border>
-            <template slot="default">
-                <span class="edit">编辑</span>
-                <span class="allocation">权限设置</span>
-            </template>
-            </van-cell>
-             <van-cell title="张三" border>
-            <template slot="default">
-                <span class="edit">编辑</span>
-                <span class="allocation">权限设置</span>
-            </template>
-            </van-cell>
-             <van-cell title="张三" border>
-            <template slot="default">
-                <span class="edit">编辑</span>
-                <span class="allocation">权限设置</span>
-            </template>
-            </van-cell>
-     </div>
+         <managelist />
+         <managelist />
+         <managelist />
+  </div>
   </div>
 </template>
 <script>
-import { Cell, Icon } from "vant";
+import { Cell, Icon,Popup } from "vant";
+import AddPer from '../../components/mine/AddPer'
+import Modification from '../../components/mine/Modification'
+import Manage from '../../components/mine/Manage'
+
 export default {
   name: "manage",
   components: {
     [Cell.name]: Cell,
-    [Icon.name]: Icon
+    [Icon.name]: Icon,
+    [Popup.name]: Popup,
+    'addper':AddPer,
+    'modification':Modification,
+    'managelist':Manage,
+  },
+  data() {
+      return {
+          addPerShow:false  
+      }
   },
   methods: {
-      //新增人员权限
-      addPer(){
-
-      }
   },
 };
 </script>
@@ -58,14 +55,13 @@ export default {
 .manage-main{
     margin-top: 10px;
 }
-.edit{
-margin-right: 10px;
-}
-.edit,.allocation{
-  
-     color: #333333;
-     font-size:13px;
-}
 
+.addPerShow{
+    width: 376px;
+    height: 100%;
+    background: #F0F0F0;
+    overflow: hidden;
+}
 
 </style>
+
