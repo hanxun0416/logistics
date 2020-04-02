@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       custName: "上海乐刚供应链股份有限公司",
-      custAddress: "中国（上海）自由贸易试验区西里路55号14层1445B室",
+      custAddress: "上海市崇明区北沿公路2111号3幢341-65室",
       name: "",
       mobile: "400-820-0666",
       bank: "中国建设银行上海自贸试验区分行",
