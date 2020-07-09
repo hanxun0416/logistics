@@ -64,7 +64,7 @@ export default {
       let price = 0;
       for (let index = 0; index < this.dataList.length; index++) {
         if (this.dataList[index].checked) {
-          price += this.dataList[index].price * 100;
+          price += this.dataList[index].price* 100;
         }
       }
       return price;
@@ -182,7 +182,7 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].billNo,
-                price: dataList[index].transPrice
+                price: dataList[index].transPrice*dataList[index].weight
               };
               this.dataList.push(data);
             }
@@ -224,7 +224,8 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].billNo,
-                price: dataList[index].transPrice
+                price: dataList[index].transPrice,
+                weight: dataList[index].weight
               };
               this.dataList.push(data);
               // this.$set(this.dataList, index, data);

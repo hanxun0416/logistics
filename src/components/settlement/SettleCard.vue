@@ -23,7 +23,7 @@
     <van-divider style="margin:0" />
     <div class="data">
       <span>运单号：{{carddata.courierNumber}}</span>
-      <span class="price">{{`￥${carddata.price}`}}</span>
+      <span class="price">{{`￥${carddata.price.toFixed(2)}`}}</span>
     </div>
   </div>
 </template>
