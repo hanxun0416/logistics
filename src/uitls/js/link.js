@@ -1,6 +1,6 @@
 import base from '../../request/base/base'
 
-let url = base.le
+let url = base.pe
 export default {
     getOffer: url + "trans/quote",//报价查询（待报价0，已报价1）
     getOfferDetail: url + "trans/quoteLine",//查询报价详情
