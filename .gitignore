@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-ROOT
+/ROOT
+/logistics_FeServer.tar.gz_*
 
 # local env files
 .env.local
