@@ -394,7 +394,6 @@ export default new Router({
     name: "map",
     component: Map,
     meta: {
-      
       isLogin:true
     }
   },
