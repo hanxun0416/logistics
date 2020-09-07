@@ -55,7 +55,10 @@ export default {
   },
   methods: {
     myclick() {
-      this.$emit("cardClick", this.carddata.index);
+   
+        this.$emit("cardClick", this.carddata.index);
+     
+    
     }
   }
 };

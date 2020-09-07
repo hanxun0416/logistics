@@ -3,7 +3,9 @@
     <div class="order">
       <span class="orderNum">{{`订单号：${carddata.orderNum}`}}</span>
       <div style="width:6vw;height:6vw;z-index:100;opacity: 0;" class="checkbox"></div>
+      
       <van-checkbox
+      v-if="carddata.isOutAll>0"
         :disabled="checkable"
         class="checkbox"
         v-model="carddata.checked"
@@ -41,7 +43,8 @@ export default {
   },
   methods: {
     myclick() {
-      if (this.checkable) {
+      console.log(this.carddata)
+      if (this.checkable||this.carddata.isOutAll<1) {
         return;
       }
       this.$emit("cardClick", this.carddata.index);

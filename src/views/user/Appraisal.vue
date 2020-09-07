@@ -572,6 +572,7 @@ changeAddress(value){
         tableName: "lg_transbillmain"
       };
       this.$api.post(link.upLoadImg,postObj).then(res=>{
+        console.log(res)
         if(res.data.code=='201'){
           this.upload()
         }

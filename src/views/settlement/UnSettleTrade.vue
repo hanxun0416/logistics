@@ -174,6 +174,7 @@ export default {
             this.pageNo++;
             let dataList = [...result.data.data.transBillMains];
             for (let index = 0; index < dataList.length; index++) {
+              console.log(dataList)
               let data = {
                 orderNum: dataList[index].allBillNo || dataList[index].orderID,
                 checked: false,
@@ -182,7 +183,8 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].billNo,
-                price: dataList[index].transPrice*dataList[index].weight
+                price: dataList[index].transPrice*dataList[index].weight,
+                isOutAll: dataList[index].isOutAll,
               };
               this.dataList.push(data);
             }
