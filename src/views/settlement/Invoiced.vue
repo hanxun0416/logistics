@@ -9,7 +9,7 @@
           @load="onLoad()"
         >
           <div v-for="(item,index) in dataList" :key="index">
-            <settled-card :carddata="item"></settled-card>
+            <settled-card :carddata="item" showPay="true"></settled-card>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -70,7 +70,8 @@ export default {
                 courierNumber: dataList[index].billNo,
                 price: dataList[index].applyMoney,
                 allBillNo: dataList[index].allBillNo,
-                orderDate: dataList[index].modifyDate
+                orderDate: dataList[index].modifyDate,
+                isPayEnd:dataList[index].isPayEnd
               };
               this.dataList.push(data);
             }

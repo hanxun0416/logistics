@@ -8,8 +8,12 @@
           :finished-text="finishedtxt"
           @load="getData()"
         >
-          <div v-for="(item,index) in dataList" :key="index">
-            <settle-card @cardClick="cardClick" :carddata="item" :checkable="submitLoading"></settle-card>
+          <div v-for="(item, index) in dataList" :key="index">
+            <settle-card
+              @cardClick="cardClick"
+              :carddata="item"
+              :checkable="submitLoading"
+            ></settle-card>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -26,7 +30,8 @@
         @click="allClick"
         style="margin-left:12px"
         v-model="checked"
-      >多选</van-checkbox>
+        >多选</van-checkbox
+      >
     </van-submit-bar>
   </div>
 </template>
@@ -42,7 +47,7 @@ export default {
     "settle-card": SettleCard,
     [PullRefresh.name]: PullRefresh,
     [Divider.name]: Divider,
-    [List.name]: List
+    [List.name]: List,
   },
   data() {
     return {
@@ -55,7 +60,7 @@ export default {
       finishedtxt: "我是有底线的",
       pageNo: 1, //页码
       pageCount: 0, //页数
-      submitList: [] //提交对账订单的的index
+      submitList: [], //提交对账订单的的index
     };
   },
   computed: {
@@ -63,12 +68,12 @@ export default {
     price: function() {
       let price = 0;
       for (let index = 0; index < this.dataList.length; index++) {
-        if (this.dataList[index].checked) {
+        if (this.dataList[index].checked && this.dataList[index].isOutAll > 0) {
           price += this.dataList[index].price * 100;
         }
       }
       return price;
-    }
+    },
   },
   methods: {
     //卡片点击事件
@@ -81,6 +86,13 @@ export default {
         return;
       }
       this.dataList[index].checked = !this.dataList[index].checked;
+      let num = 0;
+      for (let i = 0; i < this.dataList.length; i++) {
+        if (this.dataList[i].isOutAll > 0) {
+          num++;
+        }
+      }
+
       if (this.submitList.indexOf(index) == "-1") {
         this.submitList.push(index);
       } else {
@@ -94,7 +106,7 @@ export default {
           }
         }
       } else {
-        if (this.submitList.length == 20) {
+        if (this.submitList.length == num) {
           this.checked = true;
         }
       }
@@ -115,8 +127,10 @@ export default {
           index < Math.min(this.dataList.length, 20);
           index++
         ) {
-          this.dataList[index].checked = true;
-          this.submitList.push(index);
+          if (this.dataList[index].isOutAll > 0) {
+            this.dataList[index].checked = true;
+            this.submitList.push(index);
+          }
         }
       }
     },
@@ -137,9 +151,9 @@ export default {
       }
       let postObj = {
         id: id,
-        transCorpID: "71536"
+        transCorpID: "71536",
       };
-      this.$api.post(link.machineSettle, postObj).then(result => {
+      this.$api.post(link.machineSettle, postObj).then((result) => {
         if (result.data.code == "200") {
           this.submitLoading = false;
           this.submitList = [];
@@ -163,11 +177,11 @@ export default {
       let postObj = {
         transCorpID: 71536,
         pageNo: this.pageNo,
-        isMachining: 1
+        isMachining: 1,
       };
       this.$api
         .post(link.unSettleData, postObj)
-        .then(result => {
+        .then((result) => {
           if (result.data.code == "200") {
             this.pageCount = result.data.data.pageCount;
             this.pageNo++;
@@ -181,7 +195,8 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].billNo,
-                price: dataList[index].transPrice*dataList[index].weight
+                price: dataList[index].transPrice * dataList[index].weight,
+                isOutAll: dataList[index].isOutAll,
               };
               this.dataList.push(data);
             }
@@ -192,7 +207,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.loading = false;
           this.finished = true;
           this.finishedtxt = "网络错误，暂无数据";
@@ -202,11 +217,11 @@ export default {
     Refresh() {
       this.$api
         .post(link.unSettleData, {
-          pageNo: this.pageNo,
+          pageNo: 1,
           transCorpID: 71536,
-          isMachining: 1
+          isMachining: 1,
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.code == "200") {
             this.checked = false;
             this.pageCount = res.data.data.pageCount;
@@ -222,7 +237,7 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].billNo,
-                price: dataList[index].transPrice
+                price: dataList[index].transPrice-0,
               };
               this.dataList.push(data);
               // this.$set(this.dataList, index, data);
@@ -231,12 +246,12 @@ export default {
           this.isLoading = false;
           this.finished = false;
         })
-        .catch(error => {
+        .catch((error) => {
           this.isLoading = false;
           this.finishedtxt = "网络错误，暂无数据";
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>

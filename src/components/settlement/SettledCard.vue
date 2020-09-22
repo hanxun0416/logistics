@@ -19,9 +19,8 @@
       <span>运单号：{{carddata.allBillNo}}</span>
          <span class="price">{{`￥${price}`}}</span>
     </div>
-    <div class="orderUnPay">
-       
-    </div>
+    <!-- <div class="orderUnPay" v-if="carddata.isPayEnd!='1'&&showPay=='true'">
+    </div> -->
   </div>
 </template>
 <script>
@@ -30,7 +29,7 @@ import { formatDate } from "../../uitls/js/date";
 import { Divider, Checkbox } from "vant";
 export default {
   name: "SettleCard",
-  props: ["carddata"],
+  props: ["carddata","showPay"],
   data() {
     return {};
   },

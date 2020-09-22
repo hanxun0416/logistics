@@ -134,7 +134,7 @@ const Hello=()=>import('../views/helloWorld/HelloWorld.vue').catch(() => {
 Vue.use(Router);
 
 export default new Router({
-   mode: 'history',
+  //  mode: 'history',
   routes: [{
     path: "/",
     name: "home",

@@ -3,12 +3,17 @@
     <div class="order">
       <span class="orderNum">{{`订单号：${carddata.orderNum}`}}</span>
       <div style="width:6vw;height:6vw;z-index:100;opacity: 0;" class="checkbox"></div>
+      <div>
+      
       <van-checkbox
+      v-if="carddata.isOutAll>0||showCheck"
         :disabled="checkable"
         class="checkbox"
         v-model="carddata.checked"
         style="z-index:1"
       ></van-checkbox>
+      <div class="checkbox" v-else style="color:#1365e8">未出库</div>
+      </div>
       <!-- <span class="orderDate">{{carddata.orderDate}}</span> -->
     </div>
     <div class="start">
@@ -31,7 +36,7 @@
 import { Divider, Checkbox } from "vant";
 export default {
   name: "SettleCard",
-  props: ["carddata", "checkable"],
+  props: ["carddata", "checkable","showCheck"],
   data() {
     return {};
   },
@@ -39,9 +44,13 @@ export default {
     [Divider.name]: Divider,
     [Checkbox.name]: Checkbox
   },
+  created() {
+     this.carddata.price= this.carddata.price-0
+   
+  },
   methods: {
     myclick() {
-      if (this.checkable) {
+      if (this.checkable||this.carddata.isOutAll<1) {
         return;
       }
       this.$emit("cardClick", this.carddata.index);

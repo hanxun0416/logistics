@@ -10,7 +10,7 @@
           @load="getShowData()"
         >
           <div v-for="(item,index) in showList" :key="index">
-            <settle-card @cardClick="cardClick" :carddata="item" :checkable="submitLoading"></settle-card>
+            <settle-card @cardClick="cardClick" :carddata="item"  :showCheck="true" :checkable="submitLoading"></settle-card>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -194,6 +194,7 @@ export default {
             let dataList = [...result.data.data];
             this.showList = [];
             for (let index = 0; index < dataList.length; index++) {
+                console.log( dataList[index].applyMoney)
               let data = {
                 orderNum: dataList[index].orderID || dataList[index].allBillNo,
                 checked: false,
@@ -202,7 +203,7 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].allBillNo,
-                price: dataList[index].applyMoney
+                price: dataList[index].applyMoney-0
               };
               this.dataList.push(data);
             }
