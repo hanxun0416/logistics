@@ -3,16 +3,16 @@
     <div class="main-head">
       <img @click="toMine()" src="../../assets/offer/wode.png" />
       <div class="paid">
-        <router-link to="invoiced" >
-        <span class="amount">{{moneySum5}}</span>
-        <span class="tag">待付款(元) </span>
-       </router-link>
+        <router-link  :to="{path:'/invoiced', query: {data: false}}">
+          <span class="amount">{{ moneySum5 }}</span>
+          <span class="tag">待付款(元) </span>
+        </router-link>
       </div>
       <div class="unpaid">
-         <router-link to="invoiced" >
-        <span class="amount">{{moneySum6}}</span>
-        <span class="tag">已付款(元)</span>
-          </router-link>
+        <router-link  :to="{path:'/invoiced', query: {data: false}}">
+          <span class="amount">{{ moneySum6 }}</span>
+          <span class="tag">已付款(元)</span>
+        </router-link>
       </div>
     </div>
     <div class="main-mid">
@@ -22,20 +22,49 @@
           <span>对账管理</span>
         </div>
         <van-collapse v-model="activeName" accordion>
-          <van-collapse-item title="待对账" name="1" :value="`￥${sumUnSettle}`">
-            <van-cell title="加工待对账" is-link :value="`￥${moneySum7}`" to="/unSettlemach"></van-cell>
-            <van-cell title="贸易待对账" is-link :value="`￥${moneySum1}`" to="/unSettleTrade"></van-cell>
+          <van-collapse-item
+            title="待对账"
+            name="1"
+            :value="`￥${sumUnSettle}`"
+          >
+            <van-cell
+              title="加工待对账"
+              is-link
+              :value="`￥${moneySum7}`"
+              to="/unSettlemach"
+            ></van-cell>
+            <van-cell
+              title="贸易待对账"
+              is-link
+              :value="`￥${moneySum1}`"
+              to="/unSettleTrade"
+            ></van-cell>
           </van-collapse-item>
         </van-collapse>
-        <van-cell title="已对账" is-link :value="`￥${moneySum2}`" to="/settled"></van-cell>
+        <van-cell
+          title="已对账"
+          is-link
+          :value="`￥${moneySum2}`"
+          to="/settled"
+        ></van-cell>
       </div>
       <div class="reconciliation">
         <div class="title">
           <img src="../../assets/settlement/duizhangicon.png" />
           <span>开票管理</span>
         </div>
-        <van-cell title="待开票" is-link :value="`￥${moneySum3}`" to="/uninvoice"></van-cell>
-        <van-cell title="已开票" is-link :value="`￥${moneySum4}`" to="/invoiced">
+        <van-cell
+          title="待开票"
+          is-link
+          :value="`￥${moneySum3}`"
+          to="/uninvoice"
+        ></van-cell>
+        <van-cell
+          title="已开票"
+          is-link
+          :value="`￥${moneySum4}`"
+          @click="toIn"
+        >
           <!-- <van-icon
             slot="right-icon"
             :name="require('../../assets/settlement/youchejiantou.png')"
@@ -56,7 +85,7 @@ export default {
     [Cell.name]: Cell,
     [Icon.name]: Icon,
     [Collapse.name]: Collapse,
-    [CollapseItem.name]: CollapseItem
+    [CollapseItem.name]: CollapseItem,
   },
   data() {
     return {
@@ -67,7 +96,7 @@ export default {
       moneySum4: "", //已开票
       moneySum5: "", //未付款
       moneySum6: "", //已付款
-      moneySum7: "" //加工待对账
+      moneySum7: "", //加工待对账
     };
   },
   activated() {
@@ -77,20 +106,20 @@ export default {
     this.getMoney();
   },
   computed: {
-    sumUnSettle: function() {
+    sumUnSettle: function () {
       return toDecimal(
         (parseFloat(this.moneySum1) + parseFloat(this.moneySum7)) * 100,
         2
       );
-    }
+    },
   },
   methods: {
     getMoney() {
       let postObj = {
-        transCorpID: 71536
+        transCorpID: 71536,
       };
-      this.$api.post(link.settleMoney, postObj).then(result => {
-        console.log(result)
+      this.$api.post(link.settleMoney, postObj).then((result) => {
+        console.log(result);
         if (result.data.code == "200") {
           let data = result.data.data;
           [
@@ -100,7 +129,7 @@ export default {
             this.moneySum4,
             this.moneySum5,
             this.moneySum6,
-            this.moneySum7
+            this.moneySum7,
           ] = [
             toDecimal(data.moneySum1 * 100, 2),
             toDecimal(data.moneySum2 * 100, 2),
@@ -108,7 +137,7 @@ export default {
             toDecimal(data.moneySum4 * 100, 2),
             toDecimal(data.moneySum5 * 100, 2),
             toDecimal(data.moneySum6 * 100, 2),
-            toDecimal(data.moneySum7 * 100, 2)
+            toDecimal(data.moneySum7 * 100, 2),
           ];
         }
       });
@@ -116,8 +145,16 @@ export default {
     //到"我的"页面
     toMine() {
       this.$router.push("/mine");
-    }
-  }
+    },
+    toIn() {
+      this.$router.push({
+        path: '/invoiced',
+        query: {
+          data: true,
+        },
+      });
+    },
+  },
 };
 </script>
 <style lang="less" scoped>

@@ -106,6 +106,10 @@ const Settled = () => import('../views/settlement/Settled.vue').catch(() => {
 const Invoiced = () => import('../views/settlement/Invoiced.vue').catch(() => {
   Toast('loading...')
 })
+//开票付款申请
+const paymentRequest = () => import('../views/settlement/paymentRequest.vue').catch(() => {
+  Toast('loading...')
+})
 //待开票
 const Uninvoice = () => import('../views/settlement/Uninvoice.vue').catch(() => {
   Toast('loading...')
@@ -127,10 +131,27 @@ const Img = () => import('../views/user/Img.vue').catch(() => {
 const Map=()=>import('../views/map/Map.vue').catch(() => {
   Toast('loading...')
 })
+//职员权限
+const MineManage=()=>import('../views/mine/MineManage.vue').catch(() => {
+  Toast('loading...')
+})
+//职员权限管理
+const ProSet=()=>import('../views/mine/ProSet.vue').catch(() => {
+  Toast('loading...')
+})
+//新增职员权限
+const AddPer=()=>import('../views/mine/AddPer.vue').catch(() => {
+  Toast('loading...')
+})
+//职员权限信息编辑
+const Modification=()=>import('../views/mine/Modification.vue').catch(() => {
+  Toast('loading...')
+})
 //测试
 const Hello=()=>import('../views/helloWorld/HelloWorld.vue').catch(() => {
   Toast('loading...')
 })
+
 Vue.use(Router);
 
 export default new Router({
@@ -364,7 +385,18 @@ export default new Router({
       title: "已开票",
        isLogin:true
     }
-  }, {
+  },
+  {
+    path: "/paymentRequest",
+    name: "paymentRequest",
+    component: paymentRequest,
+    meta: {
+      title: "开票付款申请",
+       isLogin:true
+    }
+  },
+  
+  {
     path: "/uninvoice",
     name: "uninvoice",
     component: Uninvoice,
@@ -397,6 +429,50 @@ export default new Router({
       isLogin:true
     }
   },
+  {
+    path: "/mineManage",
+    name: "mineManage",
+    component: MineManage,
+    meta: {
+      title: "职员权限",
+      isLogin:true
+
+    }
+  },
+  {
+    path: "/proset",
+    name: "proset",
+    component: ProSet,
+    meta: {
+      title: "权限设置",
+      isLogin:true
+
+    }
+  },
+  {
+    path: "/addper",
+    name: "addper",
+    component: AddPer,
+    meta: {
+      title: "新增职员权限",
+      isLogin:true
+
+    }
+  },
+  {
+    path: "/modification",
+    name: "modification",
+    component: Modification,
+    meta: {
+      title: "编辑",
+      isLogin:true
+
+    }
+  },
+
+
+
+
   {
     path: "/hello",
     name: "hello",

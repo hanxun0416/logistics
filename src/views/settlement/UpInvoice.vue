@@ -1,5 +1,8 @@
 <template>
   <div class="main">
+    <div>
+      aaa
+    </div>
     <div class="main-head">
       <van-cell title="开票金额" :value="`${price}元`" />
       <van-field type="number" v-model="number" label="发票号" placeholder="请填写发票号" />
@@ -16,6 +19,8 @@
       ></van-uploader>
     </div>
     <van-button type="info" size="large" @click="upLoad()">提交</van-button>
+    <!-- <van-button type="info" size="large" @click="$router.push('/paymentRequest')">提交</van-button> -->
+    <!-- /paymentRequest 去开票付款申请的链接 -->
   </div>
 </template>
 <script>

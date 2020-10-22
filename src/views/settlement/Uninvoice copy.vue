@@ -187,7 +187,7 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].billNo,
-                price: dataList[index].transPrice-0
+                price: dataList[index].transPrice
               };
               this.dataList.push(data);
               // this.$set(this.dataList, index, data);

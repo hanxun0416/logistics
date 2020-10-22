@@ -9,7 +9,7 @@
           @load="onLoad()"
         >
           <div v-for="(item,index) in dataList" :key="index">
-            <settled-card :carddata="item"></settled-card>
+            <settled-card :carddata="item" :isPay="isPay0"></settled-card>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -35,7 +35,8 @@ export default {
       loading: false, //load事件是否在执行是否正在加载
       finishedtxt: "我是有底线的",
       pageNo: 1, //页码
-      pageCount: 0 //页数
+      pageCount: 0 ,//页数
+      isPay0:false
     };
   },
   methods: {
@@ -62,7 +63,6 @@ export default {
             this.pageNo++;
             let dataList = [...result.data.data.transBillMains];
             for (let index = 0; index < dataList.length; index++) {
-           
               let data = {
                 orderNum: dataList[index].orderID || dataList[index].allBillNo,
                 from: dataList[index].startAddr,
@@ -70,8 +70,7 @@ export default {
                 courierNumber: dataList[index].billNo,
                 price: dataList[index].transPrice*dataList[index].weight,
                 allBillNo: dataList[index].billNo,
-                orderDate: dataList[index].modifyDate,
-                isPayEnd:dataList[index].isPayEnd
+                orderDate: dataList[index].modifyDate
               };
               this.dataList.push(data);
             }

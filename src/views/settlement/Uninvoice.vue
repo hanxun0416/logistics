@@ -10,7 +10,7 @@
           @load="getShowData()"
         >
           <div v-for="(item,index) in showList" :key="index">
-            <settle-card @cardClick="cardClick" :carddata="item"  :showCheck="true" :checkable="submitLoading"></settle-card>
+            <settle-card @cardClick="cardClick" :carddata="item"  :checkable="submitLoading"></settle-card>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -107,6 +107,8 @@ export default {
           this.checked = true;
         }
       }
+
+      console.log('选中',this.submitList,this.showList)
     },
     //全选按钮
     allClick() {
@@ -143,12 +145,17 @@ export default {
           id += `,${this.dataList[this.submitList[index]].id}`;
         }
       }
-      this.$store.commit("invoice/updateId", id);
+      let list = [];
+      for(let i = 0;i < this.submitList.length;i++){
+        list.push(this.showList[this.submitList[i]])
+      }
+      this.$store.commit("invoice/paymentRequest", id);
       this.$router.push({
-        path: "/upInvoice",
+        path: "/paymentRequest",
         query: {
           fileApplyID: this.applyId,
-          price: this.price / 100
+          price: this.price / 100,
+          list:list
         }
       });
     },
@@ -194,7 +201,6 @@ export default {
             let dataList = [...result.data.data];
             this.showList = [];
             for (let index = 0; index < dataList.length; index++) {
-                console.log( dataList[index].applyMoney)
               let data = {
                 orderNum: dataList[index].orderID || dataList[index].allBillNo,
                 checked: false,
@@ -203,7 +209,7 @@ export default {
                 from: dataList[index].startAddr,
                 to: dataList[index].endPlace,
                 courierNumber: dataList[index].allBillNo,
-                price: dataList[index].applyMoney-0
+                price: dataList[index].applyMoney
               };
               this.dataList.push(data);
             }

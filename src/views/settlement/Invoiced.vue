@@ -8,8 +8,8 @@
           :finished-text="finishedtxt"
           @load="onLoad()"
         >
-          <div v-for="(item,index) in dataList" :key="index">
-            <settled-card :carddata="item" showPay="true"></settled-card>
+          <div v-for="(item, index) in dataList" :key="index">
+            <settled-card :carddata="item" :isPay="$route.query.data"></settled-card>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -25,8 +25,9 @@ export default {
   components: {
     "settled-card": SettledCard,
     [PullRefresh.name]: PullRefresh,
-    [List.name]: List
+    [List.name]: List,
   },
+  // props:['isPay0'],
   data() {
     return {
       dataList: [],
@@ -35,8 +36,11 @@ export default {
       loading: false, //load事件是否在执行是否正在加载
       finishedtxt: "我是有底线的",
       pageNo: 1, //页码
-      pageCount: 0 //页数
+      pageCount: 0, //页数,
     };
+  },
+   created() {
+    console.log(this.$route.query.data);
   },
   methods: {
     onLoad() {
@@ -52,12 +56,12 @@ export default {
       this.loading = true;
       let postObj = {
         transCorpID: 71536,
-        pageNo: 1
+        pageNo: 1,
       };
       this.$api
         .post(link.invoiced, postObj)
-        .then(result => {
-          console.log(result)
+        .then((result) => {
+          console.log(result);
           if (result.data.code == "200") {
             this.pageCount = result.data.data.pageNo;
             this.pageNo++;
@@ -71,7 +75,6 @@ export default {
                 price: dataList[index].applyMoney,
                 allBillNo: dataList[index].allBillNo,
                 orderDate: dataList[index].modifyDate,
-                isPayEnd:dataList[index].isPayEnd
               };
               this.dataList.push(data);
             }
@@ -81,7 +84,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.loading = false;
           this.finished = true;
           this.finishedtxt = "网络错误，暂无数据";
@@ -89,17 +92,15 @@ export default {
     },
     //下拉刷新
     Refresh() {
-         
-          this.finished = true;
+      this.finished = true;
       this.$api
         .post(link.invoiced, {
           pageNo: 1,
-          transCorpID: 71536
+          transCorpID: 71536,
         })
-        .then(res => {
-          console.log(res)
+        .then((res) => {
+          console.log(res);
           if (res.data.code == "200") {
-
             this.checked = false;
             this.pageCount = res.data.data.pageNo;
             let dataList = [...res.data.data.applyPayMains];
@@ -113,22 +114,21 @@ export default {
                 courierNumber: dataList[index].billNo,
                 price: dataList[index].applyMoney,
                 allBillNo: dataList[index].allBillNo,
-                orderDate: dataList[index].modifyDate
+                orderDate: dataList[index].modifyDate,
               };
               this.dataList.push(data);
               // this.$set(this.dataList, index, data);
-            } 
+            }
             //  this.isLoading = false;
             this.isLoading = false;
           }
-        
         })
-        .catch(error => {
+        .catch((error) => {
           this.isLoading = false;
           this.finishedtxt = "网络错误，暂无数据";
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -140,5 +140,12 @@ export default {
       min-height: e("calc(100vh - 90px)");
     }
   }
+}
+
+.pm {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
 }
 </style>

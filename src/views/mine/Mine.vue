@@ -1,5 +1,6 @@
 <template>
     <div class="main">
+          <van-cell title="职员权限" is-link  to="/mineManage"/>
         <van-cell title="车辆管理" is-link  to="/mineCar"/>
          <van-cell title="运输路线" is-link to="/mineCourse" />
         <van-cell title="我的资料" is-link to="/mineInfo" />
