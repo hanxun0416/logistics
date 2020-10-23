@@ -9,20 +9,20 @@
       </div>
       <block v-for="(item, index) in $route.query.list" :key="index">
         <div class="bor-t">
-          <span class="dib pct33 c34">{{ item.orderNum }}</span>
-          <span class="dib pct33 c34">{{ item.courierNumber }}</span>
-          <span class="dib pct33 c34">{{ item.price }}</span>
+          <span class="dib pct33 c34">{{item.orderNum}}</span>
+          <span class="dib pct33 c34">{{item.courierNumber}}</span>
+          <span class="dib pct33 c34">{{item.price}}</span>
         </div>
       </block>
       <div class="bor-t">
         <span class="dib pct33 c34">合计</span>
         <span class="dib pct33 c34">--</span>
-        <span class="dib pct33 c34">{{ $route.query.price }}</span>
+        <span class="dib pct33 c34">{{$route.query.price}}</span>
       </div>
     </div>
     <div class="mt20">
       <van-field
-        v-model="number"
+        v-model="text"
         label="发票编号"
         label-class="bl"
         placeholder="请填写发票编号"
@@ -65,7 +65,7 @@
       ></van-uploader>
     </div>
     <div class="p20">
-      <van-button type="info" round size="large" style="width: 100%"  @click="upLoad()"
+      <van-button type="info" round size="large" style="width: 100%"
         >提交申请</van-button
       >
     </div>
@@ -86,28 +86,22 @@ export default {
   name: "paymentRequest",
   components: {
     [Cell.name]: Cell,
-    [Field.name]: Field,
     [Uploader.name]: Uploader,
     [Button.name]: Button,
   },
-  // props: ["carddata"],
+  props: ["carddata"],
   data() {
     return {
       date: "",
       show: false,
       text: "",
       digit: "",
-      fileList: [],
-      file: "",
-      fileApplyID: "",
-      price: "", //价格
-      number: "",
     };
   },
 
   computed: {},
   methods: {
-    afterRead(file) {
+     afterRead(file) {
       this.file = file;
     },
     oversize(file) {
@@ -123,41 +117,39 @@ export default {
         Toast("请填写发票号！");
         return;
       }
-
-      console.log('订单号',this.number,'开票金额',this.digit,'日期',this.date,'fileList',this.fileList,'file',this.file)
       Toast.loading({
         duration: 0, // 持续展示 toast
         forbidClick: true,
         mask: true,
-        message: "拼命提交中...",
+        message: "拼命提交中..."
       });
-      // if (this.fileList.length == 0) {
-      //   this.submit();
-      // } else {
-      //   let imgList = [];
-      //   for (let index = 0; index < this.fileList.length; index++) {
-      //     let imgObj = {
-      //       content: this.fileList[index].content,
-      //       fileName: this.fileList[index].file.name,
-      //       nodeID: "0",
-      //       tabletdID: "0",
-      //       sceneType: "0",
-      //       tableName: "lg_pickbillmain",
-      //       fileGUID: this.fileApplyID,
-      //     };
-      //     imgList.push(imgObj);
-      //   }
-      //   let postObj = {
-      //     imgList: imgList,
-      //     applyID: this.fileApplyID,
-      //     tableName: "lg_transbillmain",
-      //   };
-      //   this.$api.post(link.upLoadImg, postObj).then((result) => {
-      //     if (result.data.code == "201") {
-      //       this.submit();
-      //     }
-      //   });
-      // }
+      if (this.fileList.length == 0) {
+        this.submit();
+      } else {
+        let imgList = [];
+        for (let index = 0; index < this.fileList.length; index++) {
+          let imgObj = {
+            content: this.fileList[index].content,
+            fileName: this.fileList[index].file.name,
+            nodeID: "0",
+            tabletdID: "0",
+            sceneType: "0",
+            tableName: "lg_pickbillmain",
+            fileGUID: this.fileApplyID
+          };
+          imgList.push(imgObj);
+        }
+        let postObj = {
+          imgList: imgList,
+          applyID: this.fileApplyID,
+          tableName: "lg_transbillmain"
+        };
+        this.$api.post(link.upLoadImg, postObj).then(result => {
+          if (result.data.code == "201") {
+            this.submit();
+          }
+        });
+      }
     },
     //提交
     submit() {
@@ -166,9 +158,9 @@ export default {
         id: this.id,
         fileApplyID: this.fileApplyID,
         invoiceNo: this.number,
-        applyMoney: this.price,
+        applyMoney: this.price
       };
-      this.$api.post(link.upVoice, postObj).then((result) => {
+      this.$api.post(link.upVoice, postObj).then(result => {
         if (result.data.code == "200") {
           Toast.success("提交成功！");
           this.$router.replace("/uninvoice");

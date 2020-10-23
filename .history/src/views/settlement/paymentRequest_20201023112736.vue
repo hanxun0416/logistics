@@ -124,7 +124,7 @@ export default {
         return;
       }
 
-      console.log('订单号',this.number,'开票金额',this.digit,'日期',this.date,'fileList',this.fileList,'file',this.file)
+      console.log('订单号',this.number,'开票金额',this.digit,'日期',this.data,'fileList',this.fileList,'file',this.file)
       Toast.loading({
         duration: 0, // 持续展示 toast
         forbidClick: true,

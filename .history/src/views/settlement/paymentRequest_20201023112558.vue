@@ -124,40 +124,40 @@ export default {
         return;
       }
 
-      console.log('订单号',this.number,'开票金额',this.digit,'日期',this.date,'fileList',this.fileList,'file',this.file)
+      console.log('订单号',this.number,'开票金额',this.digit,'日期',this.data)
       Toast.loading({
         duration: 0, // 持续展示 toast
         forbidClick: true,
         mask: true,
         message: "拼命提交中...",
       });
-      // if (this.fileList.length == 0) {
-      //   this.submit();
-      // } else {
-      //   let imgList = [];
-      //   for (let index = 0; index < this.fileList.length; index++) {
-      //     let imgObj = {
-      //       content: this.fileList[index].content,
-      //       fileName: this.fileList[index].file.name,
-      //       nodeID: "0",
-      //       tabletdID: "0",
-      //       sceneType: "0",
-      //       tableName: "lg_pickbillmain",
-      //       fileGUID: this.fileApplyID,
-      //     };
-      //     imgList.push(imgObj);
-      //   }
-      //   let postObj = {
-      //     imgList: imgList,
-      //     applyID: this.fileApplyID,
-      //     tableName: "lg_transbillmain",
-      //   };
-      //   this.$api.post(link.upLoadImg, postObj).then((result) => {
-      //     if (result.data.code == "201") {
-      //       this.submit();
-      //     }
-      //   });
-      // }
+      if (this.fileList.length == 0) {
+        this.submit();
+      } else {
+        let imgList = [];
+        for (let index = 0; index < this.fileList.length; index++) {
+          let imgObj = {
+            content: this.fileList[index].content,
+            fileName: this.fileList[index].file.name,
+            nodeID: "0",
+            tabletdID: "0",
+            sceneType: "0",
+            tableName: "lg_pickbillmain",
+            fileGUID: this.fileApplyID,
+          };
+          imgList.push(imgObj);
+        }
+        let postObj = {
+          imgList: imgList,
+          applyID: this.fileApplyID,
+          tableName: "lg_transbillmain",
+        };
+        this.$api.post(link.upLoadImg, postObj).then((result) => {
+          if (result.data.code == "201") {
+            this.submit();
+          }
+        });
+      }
     },
     //提交
     submit() {
