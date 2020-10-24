@@ -149,8 +149,6 @@ export default {
       for(let i = 0;i < this.submitList.length;i++){
         list.push(this.showList[this.submitList[i]])
       }
-
-
       this.$store.commit("invoice/paymentRequest", id);
       this.$router.push({
         path: "/paymentRequest",

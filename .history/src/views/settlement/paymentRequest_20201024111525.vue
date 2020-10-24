@@ -29,12 +29,11 @@
         input-align="right"
       />
       <van-field
-        v-model="price"
+        v-model="digit"
         label="开票金额"
         placeholder="请填写开票金额"
         input-align="right"
         type="digit"
-        readonly
       />
       <van-cell-group>
         <van-cell
@@ -106,29 +105,24 @@ export default {
       fileList: [],
       file: "",
       fileApplyID: "",
-      price: this.$route.query.price, //价格
+      // price: $route.query.price, //价格
       number: "",
     };
   },
   computed: {
     id: function () {
-      var id = "";
-      for(var i = 0;i < this.$route.query.list.length;i++){
-         if (i == 0) {
-          id += this.$route.query.list[i].id;
-        } else {
-          id += `,${this.$route.query.list[i].id}`;
-        }
-      }
-      return id;
+      return this.$store.state.invoice.id;
     },
   },
   methods: {
     formatDate(date) {
-       return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+      console.log(date)
+      // return `${date.getMonth() + 1}/${date.getDate()}`;
+        return `${date.getDate()}`;
     },
     onConfirm(date) {
       this.show = false;
+      console.log(date,'1111')
       this.date = this.formatDate(date);
     },
     afterRead(file) {
@@ -148,6 +142,18 @@ export default {
         return;
       }
 
+      console.log(
+        "订单号",
+        this.number,
+        "开票金额",
+        this.digit,
+        "日期",
+        this.date,
+        "fileList",
+        this.fileList,
+        "file",
+        this.file
+      );
       Toast.loading({
         duration: 0, // 持续展示 toast
         forbidClick: true,
@@ -193,15 +199,15 @@ export default {
         voiceDate: this.date,
       };
       console.log("提交参数", postObj);
-      // this.$api.post(link.upVoice, postObj).then((result) => {
-      //   if (result.data.code == "200") {
-      //     Toast.success("提交成功！");
-      //     this.$router.replace("/uninvoice");
-      //     this.$router.go(-1);
-      //   } else {
-      //     Toast.fail("提交失败，请稍候重试！");
-      //   }
-      // });
+      this.$api.post(link.upVoice, postObj).then((result) => {
+        if (result.data.code == "200") {
+          Toast.success("提交成功！");
+          this.$router.replace("/uninvoice");
+          this.$router.go(-1);
+        } else {
+          Toast.fail("提交失败，请稍候重试！");
+        }
+      });
     },
    
   },

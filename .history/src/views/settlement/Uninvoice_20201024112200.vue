@@ -150,6 +150,7 @@ export default {
         list.push(this.showList[this.submitList[i]])
       }
 
+      console.log(list)
 
       this.$store.commit("invoice/paymentRequest", id);
       this.$router.push({

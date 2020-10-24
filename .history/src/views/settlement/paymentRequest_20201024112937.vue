@@ -125,10 +125,14 @@ export default {
   },
   methods: {
     formatDate(date) {
+      console.log(date)
        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        // return `${date.getDate()}`;
+        
     },
     onConfirm(date) {
       this.show = false;
+      console.log(date,'1111')
       this.date = this.formatDate(date);
     },
     afterRead(file) {
