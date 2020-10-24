@@ -65,12 +65,7 @@
       ></van-uploader>
     </div>
     <div class="p20">
-      <van-button
-        type="info"
-        round
-        size="large"
-        style="width: 100%"
-        @click="upLoad()"
+      <van-button type="info" round size="large" style="width: 100%"  @click="upLoad()"
         >提交申请</van-button
       >
     </div>
@@ -105,15 +100,12 @@ export default {
       fileList: [],
       file: "",
       fileApplyID: "",
-      // price: $route.query.price, //价格
+      price: "", //价格
       number: "",
     };
   },
-  computed: {
-    id: function () {
-      return this.$store.state.invoice.id;
-    },
-  },
+
+  computed: {},
   methods: {
     afterRead(file) {
       this.file = file;
@@ -132,18 +124,7 @@ export default {
         return;
       }
 
-      console.log(
-        "订单号",
-        this.number,
-        "开票金额",
-        this.digit,
-        "日期",
-        this.date,
-        "fileList",
-        this.fileList,
-        "file",
-        this.file
-      );
+      console.log('订单号',this.number,'开票金额',this.digit,'日期',this.date,'fileList',this.fileList,'file',this.file)
       Toast.loading({
         duration: 0, // 持续展示 toast
         forbidClick: true,
@@ -185,10 +166,8 @@ export default {
         id: this.id,
         fileApplyID: this.fileApplyID,
         invoiceNo: this.number,
-        applyMoney: this.$route.query.price,
-        voiceDate: this.date,
+        applyMoney: this.price,
       };
-      console.log('提交参数',postObj);
       this.$api.post(link.upVoice, postObj).then((result) => {
         if (result.data.code == "200") {
           Toast.success("提交成功！");

@@ -105,7 +105,7 @@ export default {
       fileList: [],
       file: "",
       fileApplyID: "",
-      // price: $route.query.price, //价格
+      price: $route.query.price, //价格
       number: "",
     };
   },
@@ -185,19 +185,19 @@ export default {
         id: this.id,
         fileApplyID: this.fileApplyID,
         invoiceNo: this.number,
-        applyMoney: this.$route.query.price,
+        applyMoney: this.price,
         voiceDate: this.date,
       };
       console.log('提交参数',postObj);
-      this.$api.post(link.upVoice, postObj).then((result) => {
-        if (result.data.code == "200") {
-          Toast.success("提交成功！");
-          this.$router.replace("/uninvoice");
-          this.$router.go(-1);
-        } else {
-          Toast.fail("提交失败，请稍候重试！");
-        }
-      });
+      // this.$api.post(link.upVoice, postObj).then((result) => {
+      //   if (result.data.code == "200") {
+      //     Toast.success("提交成功！");
+      //     this.$router.replace("/uninvoice");
+      //     this.$router.go(-1);
+      //   } else {
+      //     Toast.fail("提交失败，请稍候重试！");
+      //   }
+      // });
     },
     formatDate(date) {
       return `${date.getMonth() + 1}/${date.getDate()}`;
