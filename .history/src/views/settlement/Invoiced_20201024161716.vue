@@ -9,10 +9,7 @@
           @load="onLoad()"
         >
           <div v-for="(item, index) in dataList" :key="index">
-            <settled-card
-              :carddata="item"
-              :isPay="$route.query.data"
-            ></settled-card>
+            <settled-card :carddata="item" :isPay="$route.query.data"></settled-card>
           </div>
         </van-list>
       </van-pull-refresh>
@@ -42,7 +39,7 @@ export default {
       pageCount: 0, //页数,
     };
   },
-  created() {
+   created() {
     console.log(this.$route.query.data);
   },
   methods: {
@@ -64,7 +61,7 @@ export default {
       this.$api
         .post(link.invoiced, postObj)
         .then((result) => {
-          console.log("数据", result);
+          console.log('数据',result);
           if (result.data.code == "200") {
             this.pageCount = result.data.data.pageCount;
             this.pageNo++;
@@ -78,13 +75,10 @@ export default {
                 // price: dataList[index].applyMoney,
                 // allBillNo: dataList[index].allBillNo,
                 // orderDate: dataList[index].modifyDate,
-                billFlowFiles: dataList[index].billFlowFiles,
-                billNo: dataList[index].billNo,
-                checkFeeLineList: dataList[index].checkFeeLineList,
-                voiceNo: dataList[index].voiceMain.voiceNo,
-                voiceSum: dataList[index].voiceMain.voiceSum,
-                corpbizDate: dataList[index].voiceMain.corpbizDate,
-                realMoney:dataList[index].realMoney
+                billFlowFiles:dataList[index].billFlowFiles,
+                billNo:dataList[index].billNo,
+                checkFeeLineList:dataList[index].checkFeeLineList,
+  
               };
               this.dataList.push(data);
             }
@@ -118,19 +112,13 @@ export default {
             this.pageNo++;
             for (let index = 0; index < dataList.length; index++) {
               let data = {
-                // orderNum: dataList[index].orderID,
-                // from: dataList[index].startAddr,
-                // to: dataList[index].endPlace,
-                // courierNumber: dataList[index].billNo,
-                // price: dataList[index].applyMoney,
-                // allBillNo: dataList[index].allBillNo,
-                // orderDate: dataList[index].modifyDate,
-                billFlowFiles: dataList[index].billFlowFiles,
-                billNo: dataList[index].billNo,
-                checkFeeLineList: dataList[index].checkFeeLineList,
-                voiceNo: dataList[index].voiceMain.voiceNo,
-                voiceSum: dataList[index].voiceMain.voiceSum,
-                corpbizDate: dataList[index].voiceMain.corpbizDate,
+                orderNum: dataList[index].orderID,
+                from: dataList[index].startAddr,
+                to: dataList[index].endPlace,
+                courierNumber: dataList[index].billNo,
+                price: dataList[index].applyMoney,
+                allBillNo: dataList[index].allBillNo,
+                orderDate: dataList[index].modifyDate,
               };
               this.dataList.push(data);
               // this.$set(this.dataList, index, data);

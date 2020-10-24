@@ -13,7 +13,7 @@
           <div class="data-item">发票编号:<span>{{carddata.voiceNo}}</span></div>
           <div class="data-item">开票日期:<span>{{carddata.corpbizDate}}</span></div>
           <div class="data-item">
-            发票类型:<span style="margin-right: 20px">专用发票</span> 税率:<span
+            发票类型:<span style="margin-right: 20px"></span> 税率:<span
               >9%</span>
           </div>
         </div>
@@ -24,16 +24,15 @@
           <blok v-for="(item, index) in carddata.billFlowFiles" :key="index">
             <a
             href="javascript:void(0)"
-            class="te van-ellipsis ui-files dib vm"
+            class="van-ellipsis ui-files dib vm"
             @click="onChange(`${item.fileUrl}`)"
             >{{item.fileName}}</a
           >
           </blok>
         </div>
-        <span class="price">{{`￥${carddata.voiceSum==null?0:carddata.voiceSum}` }}</span>
+        <span class="price">{{ `￥${carddata.voiceSum==null?0:carddata.voiceSum}` }}</span>
       </div>
-      <div v-if="carddata.realMoney>0" class="orderPay"></div>
-      <div v-else class="orderUnPay"></div>
+      <div class="{{carddata.realMoney>0?'orderPay':'orderUnPay'}}"></div>
       <van-popup
         v-model="show"
         round
@@ -55,7 +54,7 @@
         </blok>
         <div class="bor-t">
           <span class="dib pct33 c34">合计</span>
-          <span class="dib pct33 c34">{{carddata.realMoney}}</span>
+          <span class="dib pct33 c34">--</span>
           <span class="dib pct33 c34">{{carddata.voiceSum==null?0:carddata.voiceSum}}</span>
         </div>
       </van-popup>
@@ -148,12 +147,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-  .te{
-    width: 100px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
 .k-item {
   height: 29px;
   font-size: 24px;

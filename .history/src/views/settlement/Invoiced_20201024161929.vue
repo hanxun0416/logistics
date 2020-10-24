@@ -84,7 +84,6 @@ export default {
                 voiceNo: dataList[index].voiceMain.voiceNo,
                 voiceSum: dataList[index].voiceMain.voiceSum,
                 corpbizDate: dataList[index].voiceMain.corpbizDate,
-                realMoney:dataList[index].realMoney
               };
               this.dataList.push(data);
             }

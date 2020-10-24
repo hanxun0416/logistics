@@ -114,7 +114,7 @@ export default {
       price: this.$route.query.price, //价格
       number: "",
       minDate: new Date(1949, 0, 1),
-      maxDate: new Date(2099, 12, 31),
+      maxDate: new Date(2099, 0, 31),
     };
   },
   computed: {

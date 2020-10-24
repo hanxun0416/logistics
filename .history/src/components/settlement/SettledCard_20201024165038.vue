@@ -13,7 +13,7 @@
           <div class="data-item">发票编号:<span>{{carddata.voiceNo}}</span></div>
           <div class="data-item">开票日期:<span>{{carddata.corpbizDate}}</span></div>
           <div class="data-item">
-            发票类型:<span style="margin-right: 20px">专用发票</span> 税率:<span
+            发票类型:<span style="margin-right: 20px"></span> 税率:<span
               >9%</span>
           </div>
         </div>
@@ -23,6 +23,11 @@
           <span>发票照片：</span>
           <blok v-for="(item, index) in carddata.billFlowFiles" :key="index">
             <a
+            href="javascript:void(0)"
+            class="te van-ellipsis ui-files dib vm"
+            @click="onChange(`${item.fileUrl}`)"
+            >{{item.fileName}}</a
+          ><a
             href="javascript:void(0)"
             class="te van-ellipsis ui-files dib vm"
             @click="onChange(`${item.fileUrl}`)"
@@ -55,7 +60,7 @@
         </blok>
         <div class="bor-t">
           <span class="dib pct33 c34">合计</span>
-          <span class="dib pct33 c34">{{carddata.realMoney}}</span>
+          <span class="dib pct33 c34">--</span>
           <span class="dib pct33 c34">{{carddata.voiceSum==null?0:carddata.voiceSum}}</span>
         </div>
       </van-popup>

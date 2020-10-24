@@ -42,12 +42,7 @@
           :value="date == '' ? '请选择开票日期' : date"
           @click="show = true"
         />
-        <van-calendar
-          v-model="show"
-          :min-date="minDate" :max-date="maxDate"
-          @confirm="onConfirm"
-          input-align="right"
-        />
+        <van-calendar  v-model="show" @confirm="onConfirm" input-align="right" />
       </van-cell-group>
       <van-cell-group>
         <van-field label="税率" input-align="right" value="9%" readonly />
@@ -113,15 +108,13 @@ export default {
       fileApplyID: "",
       price: this.$route.query.price, //价格
       number: "",
-      minDate: new Date(1949, 0, 1),
-      maxDate: new Date(2099, 12, 31),
     };
   },
   computed: {
     id: function () {
       var id = "";
-      for (var i = 0; i < this.$route.query.list.length; i++) {
-        if (i == 0) {
+      for(var i = 0;i < this.$route.query.list.length;i++){
+         if (i == 0) {
           id += this.$route.query.list[i].id;
         } else {
           id += `,${this.$route.query.list[i].id}`;
@@ -130,13 +123,9 @@ export default {
       return id;
     },
   },
-  //  created() {
-  //    var daMin = new Date("1949/1/1");
-  //   this.minD = `${daMin.getFullYear()}/${daMin.getMonth() + 1}/${daMin.getDate()}`;
-  // },
   methods: {
     formatDate(date) {
-      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+       return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
     },
     onConfirm(date) {
       this.show = false;
