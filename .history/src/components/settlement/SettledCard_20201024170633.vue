@@ -5,8 +5,7 @@
         <div class="order">
           <span class="orderNum" style="padding: 0px"
             >{{ `对账单号：${carddata.billNo}` }}
-            <!-- <span style="color: #e6e6e6">></span> -->
-            </span
+            <span style="color: #e6e6e6">></span></span
           >
           <span class="orderDate" style="top: 0px">{{ date }}</span>
         </div>
@@ -19,17 +18,17 @@
           </div>
         </div>
       </van-cell>
-      <div class="data dac" style="padding-top: 10px">
+      <div class="data dac" style="padding-top: 5px">
         <div class="dac">
           <span>发票照片：</span>
-          <div v-for="(item, index) in carddata.billFlowFiles" :key="index">
+          <blok v-for="(item, index) in carddata.billFlowFiles" :key="index">
             <a
             href="javascript:void(0)"
             class="te van-ellipsis ui-files dib vm"
             @click="onChange(`${item.fileUrl}`)"
             >{{item.fileName}}</a
           >
-          </div>
+          </blok>
         </div>
         <span class="price">{{`￥${carddata.voiceSum==null?0:carddata.voiceSum}` }}</span>
       </div>
@@ -47,18 +46,16 @@
           <span class="dib pct33 bor-r c68">合同号</span>
           <span class="dib pct33 c68">应收款(元)</span>
         </div>
-        
-        <div v-for="(item, index) in carddata.checkFeeLineList" :key="index">
+        <blok v-for="(item, index) in carddata.checkFeeLineList" :key="index">
           <div class="bor-t">
             <span class="dib pct33 c34">{{item.orderID}}</span>
             <span class="dib pct33 c34">{{item.allBillNo}}</span>
             <span class="dib pct33 c34">{{item.moneySum}}</span>
           </div>
-        </div>
+        </blok>
         <div class="bor-t">
           <span class="dib pct33 c34">合计</span>
-          <!-- {{carddata.realMoney}} -->
-          <span class="dib pct33 c34"></span>
+          <span class="dib pct33 c34">{{carddata.realMoney}}</span>
           <span class="dib pct33 c34">{{carddata.voiceSum==null?0:carddata.voiceSum}}</span>
         </div>
       </van-popup>
@@ -110,7 +107,7 @@ export default {
     [Cell.name]: Cell,
   },
   created() {
-    // console.log(this.$router)
+   
   },
   computed: {
     price: function () {
@@ -200,10 +197,9 @@ export default {
   border-right: 1px solid #e5e5e5;
 }
 .ui-files {
-  // margin-top: 2px;
   font-size: 12px;
-  line-height: 22px;
-  height: 22px;
+  line-height: 20px;
+  height: 20px;
   box-sizing: border-box;
   display: inline-block;
   border: 1px solid #e5e5e5;
@@ -212,7 +208,7 @@ export default {
   color: #676767;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAAaVBMVEUAAABnZ2eRkZFnZ2dqampnZ2dnZ2doaGhoaGhqampxcXFnZ2dnZ2dnZ2d1dXV1dXVoaGhoaGhnZ2dpaWlqampra2tnZ2doaGhoaGhnZ2doaGhoaGhoaGhnZ2doaGhpaWloaGhubm5oaGi5bYGQAAAAI3RSTlMA8QTRO+DLo50sFLKrXA8I6dqVQR4Z7MK/uIV7dWliUUsSUy6uY1YAAAB+SURBVAjXVcpJEoMgFADRRkFwQJyNRqPm/ofMj6zs3atq7ur5y11UVoaHksIZY0ekS5Q3VmvXiIu0Er2RnIOXaBIN0LfsbcinDbyqOVNmT7bCR/UyrqgcpUWaxKaBtqczS1QBtgO/DSTVXwzqRApRcCh36N0sF7Gxy0zpufsBazsGKR4Zi4oAAAAASUVORK5CYII=)
     #fff no-repeat 12px 5px;
-  background-size: 12px 12px;
+  background-size: 15px 15px;
   max-width: 500px;
   overflow: hidden;
 }
@@ -326,7 +322,7 @@ export default {
     }
   }
   .data {
-    border-top: 1px solid #e6e6e6;
+    border-top: 0.5px solid #e6e6e6;
     padding-left: 10px;
     flex-grow: 1;
     .flex(row, space-between);

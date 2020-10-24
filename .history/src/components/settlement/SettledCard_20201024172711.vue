@@ -110,7 +110,7 @@ export default {
     [Cell.name]: Cell,
   },
   created() {
-    // console.log(this.$router)
+    console.log(this.$router)
   },
   computed: {
     price: function () {

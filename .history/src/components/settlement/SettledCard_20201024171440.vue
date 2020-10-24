@@ -22,14 +22,14 @@
       <div class="data dac" style="padding-top: 10px">
         <div class="dac">
           <span>发票照片：</span>
-          <div v-for="(item, index) in carddata.billFlowFiles" :key="index">
+          <blok v-for="(item, index) in carddata.billFlowFiles" :key="index">
             <a
             href="javascript:void(0)"
             class="te van-ellipsis ui-files dib vm"
             @click="onChange(`${item.fileUrl}`)"
             >{{item.fileName}}</a
           >
-          </div>
+          </blok>
         </div>
         <span class="price">{{`￥${carddata.voiceSum==null?0:carddata.voiceSum}` }}</span>
       </div>
@@ -47,18 +47,16 @@
           <span class="dib pct33 bor-r c68">合同号</span>
           <span class="dib pct33 c68">应收款(元)</span>
         </div>
-        
-        <div v-for="(item, index) in carddata.checkFeeLineList" :key="index">
+        <blok v-for="(item, index) in carddata.checkFeeLineList" :key="index">
           <div class="bor-t">
             <span class="dib pct33 c34">{{item.orderID}}</span>
             <span class="dib pct33 c34">{{item.allBillNo}}</span>
             <span class="dib pct33 c34">{{item.moneySum}}</span>
           </div>
-        </div>
+        </blok>
         <div class="bor-t">
           <span class="dib pct33 c34">合计</span>
-          <!-- {{carddata.realMoney}} -->
-          <span class="dib pct33 c34"></span>
+          <span class="dib pct33 c34">{{carddata.realMoney}}</span>
           <span class="dib pct33 c34">{{carddata.voiceSum==null?0:carddata.voiceSum}}</span>
         </div>
       </van-popup>
@@ -110,7 +108,7 @@ export default {
     [Cell.name]: Cell,
   },
   created() {
-    // console.log(this.$router)
+   
   },
   computed: {
     price: function () {
